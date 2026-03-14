@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Visitenkarte – Maiks mobiler Fahrradservice</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap');
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #1a1a1a;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      gap: 40px;
+      padding: 40px 20px;
+      font-family: 'Open Sans', Arial, sans-serif;
+    }
+
+    h2 {
+      color: #D4A017;
+      font-family: 'Oswald', sans-serif;
+      font-size: 14px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    /* ================================
+       VISITENKARTE: 85mm x 55mm
+       @ 96dpi ≈ 323px x 209px
+       Skaliert 2x für Bildschirm: 646 x 418
+    ================================ */
+    .card {
+      width: 646px;
+      height: 418px;
+      border-radius: 12px;
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.6), 0 0 0 2px #D4A017;
+    }
+
+    /* ===== VORDERSEITE ===== */
+    .card-front {
+      background: linear-gradient(160deg, #3A2010 0%, #2C1A0E 40%, #1E0F06 100%);
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    /* Goldene Akzentlinie oben */
+    .card-front::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #8B6000, #D4A017, #F5C842, #D4A017, #8B6000);
+    }
+
+    /* Goldene Akzentlinie unten */
+    .card-front::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #8B6000, #D4A017, #F5C842, #D4A017, #8B6000);
+    }
+
+    .card-front .top-section {
+      display: flex;
+      align-items: center;
+      padding: 22px 28px 14px;
+      gap: 18px;
+    }
+
+    .logo-wrapper {
+      width: 82px;
+      height: 82px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .logo-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      /* Weißen Hintergrund entfernen: Logo grau → gold/weiß invertieren */
+      filter: invert(1) sepia(1) saturate(2) hue-rotate(10deg) brightness(1.1);
+      mix-blend-mode: screen;
+    }
+
+    .brand-text {
+      flex: 1;
+    }
+
+    .brand-text .name {
+      font-family: 'Oswald', sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: #F5C842;
+      line-height: 1.15;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .brand-text .service {
+      font-family: 'Oswald', sans-serif;
+      font-size: 16px;
+      font-weight: 400;
+      color: #ffffff;
+      margin-top: 2px;
+      letter-spacing: 0.5px;
+    }
+
+    .divider {
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #D4A017, #F5C842, #D4A017, transparent);
+      margin: 0 20px;
+    }
+
+    .card-front .bottom-section {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 28px;
+    }
+
+    .tagline-block .tagline {
+      font-family: 'Oswald', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      color: #F5C842;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .tagline-block .region {
+      font-size: 11px;
+      color: #ccb88a;
+      margin-top: 4px;
+    }
+
+    .contact-block {
+      text-align: right;
+    }
+
+    .contact-block .label {
+      font-size: 10px;
+      color: #D4A017;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .contact-block .phone {
+      font-family: 'Oswald', sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: #ffffff;
+      margin-top: 2px;
+    }
+
+    .contact-block .channels {
+      font-size: 10px;
+      color: #ccb88a;
+      margin-top: 2px;
+    }
+
+    /* Footer-Streifen */
+    .card-front .footer-strip {
+      background: linear-gradient(90deg, #5A3800, #3A2200, #5A3800);
+      padding: 7px 28px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-top: 1px solid #D4A017;
+    }
+
+    .card-front .footer-strip span {
+      font-family: 'Oswald', sans-serif;
+      font-size: 11px;
+      font-weight: 400;
+      color: #F5C842;
+      letter-spacing: 2px;
+    }
+
+    /* ===== RÜCKSEITE ===== */
+    .card-back {
+      background: linear-gradient(160deg, #3A2010 0%, #2C1A0E 40%, #1E0F06 100%);
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .card-back::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #8B6000, #D4A017, #F5C842, #D4A017, #8B6000);
+    }
+
+    .card-back::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #8B6000, #D4A017, #F5C842, #D4A017, #8B6000);
+    }
+
+    .card-back .back-content {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 24px 32px;
+      gap: 24px;
+    }
+
+    .services-block {
+      flex: 1;
+    }
+
+    .services-block .services-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      color: #F5C842;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 10px;
+    }
+
+    .services-block ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .services-block ul li {
+      font-size: 10.5px;
+      color: #f0e8d5;
+      padding: 3px 0;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .services-block ul li::before {
+      content: '✓';
+      color: #D4A017;
+      font-weight: 700;
+      font-size: 11px;
+    }
+
+    .safety-badge {
+      background: linear-gradient(135deg, #3A2200, #4A2D00);
+      border: 1.5px solid #D4A017;
+      border-radius: 8px;
+      padding: 14px 16px;
+      text-align: center;
+      min-width: 140px;
+    }
+
+    .safety-badge .badge-icon {
+      font-size: 22px;
+      margin-bottom: 4px;
+    }
+
+    .safety-badge .badge-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      color: #F5C842;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .safety-badge .badge-sub {
+      font-size: 9.5px;
+      color: #ccb88a;
+      margin-top: 4px;
+      line-height: 1.4;
+    }
+
+    .card-back .footer-strip {
+      background: linear-gradient(90deg, #5A3800, #3A2200, #5A3800);
+      padding: 7px 28px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-top: 1px solid #D4A017;
+    }
+
+    .card-back .footer-strip span {
+      font-family: 'Oswald', sans-serif;
+      font-size: 11px;
+      font-weight: 400;
+      color: #F5C842;
+      letter-spacing: 2px;
+    }
+
+    .note {
+      color: #888;
+      font-size: 12px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Visitenkarte – Vorderseite</h2>
+
+  <!-- VORDERSEITE -->
+  <div class="card">
+    <div class="card-front">
+      <div class="top-section">
+        <div class="logo-wrapper">
+          <!-- Inline SVG Logo: Fahrrad + Schraubenschlüssel + Unendlichkeit -->
+          <svg viewBox="0 0 200 130" xmlns="http://www.w3.org/2000/svg" width="82" height="82" style="filter: drop-shadow(0 0 4px rgba(212,160,23,0.5));">
+            <!-- Linkes Rad (Infinity links) -->
+            <circle cx="58" cy="78" r="44" fill="none" stroke="#D4A017" stroke-width="14"/>
+            <!-- Rechtes Rad (Infinity rechts) -->
+            <circle cx="142" cy="78" r="44" fill="none" stroke="#D4A017" stroke-width="14"/>
+            <!-- Rahmen: Sattelrohr -->
+            <line x1="72" y1="44" x2="58" y2="78" stroke="#D4A017" stroke-width="12" stroke-linecap="round"/>
+            <!-- Rahmen: Oberrohr -->
+            <line x1="72" y1="44" x2="128" y2="38" stroke="#D4A017" stroke-width="10" stroke-linecap="round"/>
+            <!-- Rahmen: Unterrohr -->
+            <line x1="72" y1="44" x2="142" y2="78" stroke="#D4A017" stroke-width="10" stroke-linecap="round"/>
+            <!-- Sattel -->
+            <rect x="50" y="30" width="26" height="9" rx="4" fill="#D4A017"/>
+            <!-- Sattelstütze -->
+            <line x1="63" y1="39" x2="72" y2="44" stroke="#D4A017" stroke-width="9" stroke-linecap="round"/>
+            <!-- Lenker -->
+            <line x1="128" y1="38" x2="148" y2="32" stroke="#D4A017" stroke-width="9" stroke-linecap="round"/>
+            <line x1="148" y1="32" x2="154" y2="44" stroke="#D4A017" stroke-width="9" stroke-linecap="round"/>
+            <!-- Schraubenschlüssel (diagonalüber den Rahmen) -->
+            <g transform="translate(100,62) rotate(-35)">
+              <!-- Schraubenschlüssel Kopf (Hexagon) -->
+              <circle cx="0" cy="-20" r="13" fill="none" stroke="#F5C842" stroke-width="7"/>
+              <circle cx="0" cy="-20" r="5" fill="#F5C842"/>
+              <!-- Schraubenschlüssel Griff -->
+              <rect x="-5" y="-10" width="10" height="32" rx="4" fill="#F5C842"/>
+              <!-- Griff-Markierungen -->
+              <rect x="-5" y="8" width="10" height="3" rx="1" fill="#2C1A0E"/>
+              <rect x="-5" y="14" width="10" height="3" rx="1" fill="#2C1A0E"/>
+            </g>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <div class="name">Maiks mobiler</div>
+          <div class="service">Fahrradservice</div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="bottom-section">
+        <div class="tagline-block">
+          <div class="tagline">Mobil · Fair · Zuverlässig</div>
+          <div class="region">📍 Mandelsloh &amp; Region Hannover</div>
+          <div class="region" style="margin-top:6px;">Reparaturen direkt bei Ihnen vor Ort</div>
+        </div>
+        <div class="contact-block">
+          <div class="label">Tel. &amp; WhatsApp</div>
+          <div class="phone">0176 81419966</div>
+          <div class="channels">Jetzt Termin anfragen</div>
+        </div>
+      </div>
+
+      <div class="footer-strip">
+        <span>Alle Marken willkommen &nbsp;·&nbsp; Markenrad · Baumarkt · Discountrad</span>
+      </div>
+    </div>
+  </div>
+
+  <h2>Visitenkarte – Rückseite</h2>
+
+  <!-- RÜCKSEITE -->
+  <div class="card">
+    <div class="card-back">
+      <div class="back-content">
+        <div class="services-block">
+          <div class="services-title">Unsere Leistungen</div>
+          <ul>
+            <li>Inspektion E-Bike (alle Marken!) &nbsp;<strong style="color:#F5C842;">ab 89,– €</strong></li>
+            <li>Fahrrad-Inspektion &nbsp;<strong style="color:#F5C842;">ab 69,– €</strong></li>
+            <li>Schlauchwechsel inkl. Material &nbsp;<strong style="color:#F5C842;">ab 30,– €</strong></li>
+            <li>Bremsen, Schaltung, Licht &nbsp;<strong style="color:#F5C842;">auf Anfrage</strong></li>
+            <li>Anhänger, Lastenrad, Kinderrad &nbsp;<strong style="color:#F5C842;">auf Anfrage</strong></li>
+          </ul>
+        </div>
+        <div class="safety-badge">
+          <div class="badge-icon">🛡️</div>
+          <div class="badge-title">Kostenloser<br>Sicherheits-Check</div>
+          <div class="badge-sub">Bremsen · Licht<br>Luftdruck</div>
+        </div>
+      </div>
+      <div class="footer-strip">
+        <span>0176 81419966 &nbsp;·&nbsp; Tel. &amp; WhatsApp</span>
+      </div>
+    </div>
+  </div>
+
+  <p class="note">Druckformat: 85 × 55 mm &nbsp;|&nbsp; Farben und Design vom Flyer übernommen &nbsp;|&nbsp; Ohne Sonnenblume</p>
+
+</body>
+</html>
