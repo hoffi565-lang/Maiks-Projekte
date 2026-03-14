@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Maiks mobiler Fahrradservice</title>
+  <meta name="description" content="Maiks mobiler Fahrradservice – Reparaturen direkt bei Ihnen vor Ort. Kein Transport, kein Stress. Region Hannover & Mandelsloh." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gold: #f5c518;
+      --gold-dark: #d4a017;
+      --gold-light: #ffe066;
+      --brown: #3a2408;
+      --brown-mid: #5c3a10;
+      --brown-light: #7a4f1e;
+      --text-light: #fff8e7;
+      --earth: #8b5e2a;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Open Sans', sans-serif;
+      background: var(--brown);
+      color: var(--text-light);
+      overflow-x: hidden;
+    }
+
+    /* ── HERO ─────────────────────────────────────────────── */
+    .hero {
+      position: relative;
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(to bottom, rgba(30,15,0,0.25) 0%, rgba(30,15,0,0.55) 60%, rgba(30,15,0,0.85) 100%),
+        url('hero-bg.jpg') center/cover no-repeat;
+      z-index: 0;
+    }
+
+    /* Sunflower SVG backdrop circle */
+    .hero-sunflower {
+      position: absolute;
+      top: -8%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(520px, 90vw);
+      height: auto;
+      z-index: 1;
+      filter: drop-shadow(0 8px 32px rgba(0,0,0,0.5));
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      padding: 2rem 1.5rem 3.5rem;
+      max-width: 680px;
+      width: 100%;
+    }
+
+    .hero-eyebrow {
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(2rem, 7vw, 3.6rem);
+      font-weight: 700;
+      color: var(--gold);
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+      line-height: 1.1;
+      letter-spacing: 0.02em;
+    }
+
+    .hero-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(2.8rem, 10vw, 5.5rem);
+      font-weight: 700;
+      color: var(--gold);
+      text-shadow: 3px 3px 12px rgba(0,0,0,0.75);
+      line-height: 1;
+      letter-spacing: 0.01em;
+      margin-top: 0.2rem;
+    }
+
+    .hero-tagline {
+      margin-top: 1.2rem;
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(1rem, 3.5vw, 1.35rem);
+      font-weight: 600;
+      color: var(--text-light);
+      text-shadow: 1px 1px 6px rgba(0,0,0,0.8);
+      line-height: 1.4;
+    }
+
+    .hero-tagline strong { color: var(--gold); }
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 2rem;
+      padding: 0.9rem 2.2rem;
+      background: var(--gold);
+      color: var(--brown);
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      text-decoration: none;
+      border-radius: 4px;
+      letter-spacing: 0.04em;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+      transition: background 0.2s, transform 0.15s;
+    }
+    .hero-cta:hover { background: var(--gold-light); transform: translateY(-2px); }
+    .hero-cta svg { flex-shrink: 0; }
+
+    /* ── DIVIDER ──────────────────────────────────────────── */
+    .divider {
+      height: 6px;
+      background: linear-gradient(90deg, var(--brown-mid), var(--gold), var(--brown-mid));
+    }
+
+    /* ── CLAIM BANNER ─────────────────────────────────────── */
+    .claim {
+      background: linear-gradient(135deg, var(--brown-mid) 0%, var(--brown-light) 100%);
+      padding: 2.8rem 1.5rem;
+      text-align: center;
+      border-bottom: 4px solid var(--gold-dark);
+    }
+
+    .claim h2 {
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(1.25rem, 4.5vw, 2rem);
+      font-weight: 700;
+      color: var(--text-light);
+      line-height: 1.4;
+    }
+
+    .claim h2 strong { color: var(--gold); }
+
+    /* ── SERVICES ─────────────────────────────────────────── */
+    .services {
+      background: linear-gradient(180deg, #2a1505 0%, #3a2408 100%);
+      padding: 3.5rem 1.5rem;
+    }
+
+    .section-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(1.5rem, 5vw, 2.2rem);
+      font-weight: 700;
+      color: var(--gold);
+      text-align: center;
+      margin-bottom: 2rem;
+      letter-spacing: 0.05em;
+    }
+
+    .services-grid {
+      max-width: 760px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .service-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1.1rem 1.5rem;
+      border-bottom: 1px solid rgba(245,197,24,0.2);
+      transition: background 0.2s;
+    }
+
+    .service-item:first-child { border-top: 1px solid rgba(245,197,24,0.2); }
+    .service-item:hover { background: rgba(245,197,24,0.07); }
+
+    .service-left {
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+    }
+
+    .service-check {
+      width: 24px;
+      height: 24px;
+      flex-shrink: 0;
+      color: var(--gold);
+    }
+
+    .service-name {
+      font-size: clamp(0.95rem, 2.5vw, 1.05rem);
+      font-weight: 600;
+      color: var(--text-light);
+    }
+
+    .service-price {
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(1rem, 2.8vw, 1.15rem);
+      font-weight: 700;
+      color: var(--gold);
+      white-space: nowrap;
+    }
+
+    /* ── BRANDS ───────────────────────────────────────────── */
+    .brands {
+      background: var(--brown-mid);
+      padding: 1.8rem 1.5rem;
+      text-align: center;
+      border-top: 3px solid var(--gold-dark);
+      border-bottom: 3px solid var(--gold-dark);
+    }
+
+    .brands-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(1.2rem, 4vw, 1.6rem);
+      font-weight: 700;
+      color: var(--gold);
+      margin-bottom: 0.4rem;
+    }
+
+    .brands-sub {
+      font-size: 0.95rem;
+      color: var(--text-light);
+      letter-spacing: 0.08em;
+    }
+
+    .brands-sub span { margin: 0 0.4rem; color: var(--gold); }
+
+    /* ── FREE CHECK ───────────────────────────────────────── */
+    .free-check {
+      background: linear-gradient(135deg, #1a0f00 0%, #2d1a05 100%);
+      padding: 3rem 1.5rem;
+      text-align: center;
+    }
+
+    .free-check-card {
+      max-width: 540px;
+      margin: 0 auto;
+      background: linear-gradient(135deg, var(--brown-mid), var(--brown-light));
+      border: 3px solid var(--gold);
+      border-radius: 12px;
+      padding: 2rem 2.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+    }
+
+    .shield-icon {
+      width: 70px;
+      height: 70px;
+      color: var(--gold);
+    }
+
+    .free-check-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(1.3rem, 4.5vw, 1.8rem);
+      font-weight: 700;
+      color: var(--gold);
+      line-height: 1.2;
+    }
+
+    .free-check-items {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.5rem 1.2rem;
+      font-size: 0.95rem;
+      color: var(--text-light);
+    }
+
+    .free-check-items span { display: flex; align-items: center; gap: 0.3rem; }
+    .free-check-items span::before { content: "·"; color: var(--gold); font-size: 1.4rem; line-height: 1; }
+
+    /* ── CONTACT ──────────────────────────────────────────── */
+    .contact {
+      background: linear-gradient(135deg, #2a1505, #3d2208);
+      padding: 3.5rem 1.5rem;
+      text-align: center;
+    }
+
+    .contact-inner {
+      max-width: 680px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 2.5rem;
+      align-items: center;
+    }
+
+    @media (max-width: 560px) {
+      .contact-inner { grid-template-columns: 1fr; }
+      .qr-block { justify-self: center; }
+    }
+
+    .contact-label {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--gold);
+      margin-bottom: 0.4rem;
+    }
+
+    .contact-number {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(2rem, 8vw, 3rem);
+      font-weight: 700;
+      color: var(--text-light);
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      margin-bottom: 0.3rem;
+      transition: color 0.2s;
+    }
+    .contact-number:hover { color: var(--gold); }
+    .contact-number svg { color: var(--gold); flex-shrink: 0; }
+
+    .contact-hint {
+      font-size: 0.9rem;
+      color: rgba(255,248,231,0.7);
+    }
+
+    .qr-block {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .qr-box {
+      width: 120px;
+      height: 120px;
+      background: white;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      border: 3px solid var(--gold);
+    }
+
+    .qr-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    /* QR placeholder rendered via CSS */
+    .qr-placeholder {
+      width: 100px;
+      height: 100px;
+      background:
+        repeating-linear-gradient(0deg, #000 0px, #000 4px, transparent 4px, transparent 8px),
+        repeating-linear-gradient(90deg, #000 0px, #000 4px, transparent 4px, transparent 8px);
+      opacity: 0.15;
+    }
+
+    .qr-label {
+      font-size: 0.75rem;
+      color: rgba(255,248,231,0.6);
+      text-align: center;
+    }
+
+    /* WhatsApp CTA */
+    .wa-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-top: 1.2rem;
+      padding: 0.85rem 2rem;
+      background: #25D366;
+      color: #fff;
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      text-decoration: none;
+      border-radius: 4px;
+      letter-spacing: 0.04em;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.35);
+      transition: background 0.2s, transform 0.15s;
+    }
+    .wa-btn:hover { background: #1ebe5c; transform: translateY(-2px); }
+
+    /* ── FOOTER ───────────────────────────────────────────── */
+    footer {
+      background: var(--brown);
+      border-top: 5px solid var(--gold);
+      padding: 1.4rem 1.5rem;
+      text-align: center;
+    }
+
+    .footer-slogan {
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(0.85rem, 3vw, 1.05rem);
+      color: var(--text-light);
+      letter-spacing: 0.06em;
+    }
+
+    .footer-slogan strong { color: var(--gold); }
+    .footer-slogan span { margin: 0 0.35rem; color: var(--gold-dark); }
+
+    /* ── STICKY PHONE BAR (mobile) ────────────────────────── */
+    .sticky-bar {
+      display: none;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: var(--gold);
+      padding: 0.9rem 1rem;
+      justify-content: center;
+      align-items: center;
+      gap: 0.6rem;
+      box-shadow: 0 -3px 16px rgba(0,0,0,0.4);
+    }
+
+    @media (max-width: 640px) { .sticky-bar { display: flex; } body { padding-bottom: 60px; } }
+
+    .sticky-bar a {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--brown);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    /* ── SUNFLOWER SVG (inline) ───────────────────────────── */
+    /* If no hero-bg.jpg, show a warm gradient */
+    @media (max-width: 480px) {
+      .hero-sunflower { width: 85vw; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── HERO ── -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+
+    <!-- Sunflower SVG (decorative, scales with viewport) -->
+    <svg class="hero-sunflower" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <defs>
+        <radialGradient id="centerGrad" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#6b3a0a"/>
+          <stop offset="100%" stop-color="#3d1f05"/>
+        </radialGradient>
+        <radialGradient id="petalGrad" cx="50%" cy="0%" r="100%">
+          <stop offset="0%" stop-color="#ffe033"/>
+          <stop offset="100%" stop-color="#c87d00"/>
+        </radialGradient>
+      </defs>
+      <!-- Petals -->
+      <g transform="translate(200,200)">
+        <!-- 16 petals rotated -->
+        <ellipse cx="0" cy="-145" rx="22" ry="55" fill="url(#petalGrad)" transform="rotate(0)"/>
+        <ellipse cx="0" cy="-145" rx="22" ry="55" fill="url(#petalGrad)" transform="rotate(22.5)"/>
+        <ellipse cx="0" cy="-145" rx="22" ry="55" fill="url(#petalGrad)" transform="rotate(45)"/>
+        <ellipse cx="0" cy="-145" rx="22" ry="55" fill="url(#petalGrad)" transform="rotate(67.5)"/>
+        <ellipse cx="0" cy="-145" rx="22" ry="55" fill="url(#petalGrad)" transform="rotate(90)"/>
+        <ellipse cx="0" cy="-145" rx="22" ry="55" fill="url(#petalGrad)" transform="rotate(112.5)"/>
+        <ellipse cx="0" cy="-145" rx="22" ry="55" fill="url(#petalGrad)" transform="rotate(135)"/>
+        <ellipse cx="0" cy="-145" rx="22" ry="55" fill="url(#petalGrad)" transform="rotate(157.5)"/>
+        <ellipse cx="0" cy="-145" rx="22" ry="55" fill="url(#petalGrad)" transform="rotate(180)"/>
+        <ellipse cx="0" cy="-145" rx="22" ry="55" fill="url(#petalGrad)" transform="rotate(202.5)"/>
+        <ellipse cx="0" cy="-145" rx="22" ry="55" fill="url(#petalGrad)" transform="rotate(225)"/>
+        <ellipse cx="0" cy="-145" rx="22" ry="55" fill="url(#petalGrad)" transform="rotate(247.5)"/>
+        <ellipse cx="0" cy="-145" rx="22" ry="55" fill="url(#petalGrad)" transform="rotate(270)"/>
+        <ellipse cx="0" cy="-145" rx="22" ry="55" fill="url(#petalGrad)" transform="rotate(292.5)"/>
+        <ellipse cx="0" cy="-145" rx="22" ry="55" fill="url(#petalGrad)" transform="rotate(315)"/>
+        <ellipse cx="0" cy="-145" rx="22" ry="55" fill="url(#petalGrad)" transform="rotate(337.5)"/>
+        <!-- Inner ring petals -->
+        <ellipse cx="0" cy="-118" rx="16" ry="42" fill="#e8a800" opacity="0.7" transform="rotate(11.25)"/>
+        <ellipse cx="0" cy="-118" rx="16" ry="42" fill="#e8a800" opacity="0.7" transform="rotate(33.75)"/>
+        <ellipse cx="0" cy="-118" rx="16" ry="42" fill="#e8a800" opacity="0.7" transform="rotate(56.25)"/>
+        <ellipse cx="0" cy="-118" rx="16" ry="42" fill="#e8a800" opacity="0.7" transform="rotate(78.75)"/>
+        <ellipse cx="0" cy="-118" rx="16" ry="42" fill="#e8a800" opacity="0.7" transform="rotate(101.25)"/>
+        <ellipse cx="0" cy="-118" rx="16" ry="42" fill="#e8a800" opacity="0.7" transform="rotate(123.75)"/>
+        <ellipse cx="0" cy="-118" rx="16" ry="42" fill="#e8a800" opacity="0.7" transform="rotate(146.25)"/>
+        <ellipse cx="0" cy="-118" rx="16" ry="42" fill="#e8a800" opacity="0.7" transform="rotate(168.75)"/>
+        <ellipse cx="0" cy="-118" rx="16" ry="42" fill="#e8a800" opacity="0.7" transform="rotate(191.25)"/>
+        <ellipse cx="0" cy="-118" rx="16" ry="42" fill="#e8a800" opacity="0.7" transform="rotate(213.75)"/>
+        <ellipse cx="0" cy="-118" rx="16" ry="42" fill="#e8a800" opacity="0.7" transform="rotate(236.25)"/>
+        <ellipse cx="0" cy="-118" rx="16" ry="42" fill="#e8a800" opacity="0.7" transform="rotate(258.75)"/>
+        <ellipse cx="0" cy="-118" rx="16" ry="42" fill="#e8a800" opacity="0.7" transform="rotate(281.25)"/>
+        <ellipse cx="0" cy="-118" rx="16" ry="42" fill="#e8a800" opacity="0.7" transform="rotate(303.75)"/>
+        <ellipse cx="0" cy="-118" rx="16" ry="42" fill="#e8a800" opacity="0.7" transform="rotate(326.25)"/>
+        <ellipse cx="0" cy="-118" rx="16" ry="42" fill="#e8a800" opacity="0.7" transform="rotate(348.75)"/>
+        <!-- Center disk -->
+        <circle r="82" fill="url(#centerGrad)"/>
+        <!-- Seed spiral dots -->
+        <circle cx="0" cy="-55" r="5" fill="#2a1000" opacity="0.6"/>
+        <circle cx="30" cy="-45" r="5" fill="#2a1000" opacity="0.6"/>
+        <circle cx="52" cy="-22" r="5" fill="#2a1000" opacity="0.6"/>
+        <circle cx="55" cy="10" r="5" fill="#2a1000" opacity="0.6"/>
+        <circle cx="40" cy="40" r="5" fill="#2a1000" opacity="0.6"/>
+        <circle cx="10" cy="58" r="5" fill="#2a1000" opacity="0.6"/>
+        <circle cx="-22" cy="55" r="5" fill="#2a1000" opacity="0.6"/>
+        <circle cx="-48" cy="35" r="5" fill="#2a1000" opacity="0.6"/>
+        <circle cx="-57" cy="5" r="5" fill="#2a1000" opacity="0.6"/>
+        <circle cx="-48" cy="-28" r="5" fill="#2a1000" opacity="0.6"/>
+        <circle cx="-25" cy="-52" r="5" fill="#2a1000" opacity="0.6"/>
+        <!-- Inner dots -->
+        <circle cx="0" cy="-32" r="4" fill="#1a0a00" opacity="0.5"/>
+        <circle cx="20" cy="-25" r="4" fill="#1a0a00" opacity="0.5"/>
+        <circle cx="32" cy="-8" r="4" fill="#1a0a00" opacity="0.5"/>
+        <circle cx="28" cy="18" r="4" fill="#1a0a00" opacity="0.5"/>
+        <circle cx="12" cy="34" r="4" fill="#1a0a00" opacity="0.5"/>
+        <circle cx="-12" cy="34" r="4" fill="#1a0a00" opacity="0.5"/>
+        <circle cx="-28" cy="18" r="4" fill="#1a0a00" opacity="0.5"/>
+        <circle cx="-32" cy="-8" r="4" fill="#1a0a00" opacity="0.5"/>
+        <circle cx="-20" cy="-25" r="4" fill="#1a0a00" opacity="0.5"/>
+      </g>
+    </svg>
+
+    <div class="hero-content">
+      <div class="hero-eyebrow">Maiks mobiler</div>
+      <div class="hero-title">Fahrradservice</div>
+      <p class="hero-tagline">
+        <strong>Reparaturen direkt bei Ihnen vor Ort</strong><br>
+        kein Transport &ndash; kein Stress
+      </p>
+      <a class="hero-cta" href="#kontakt">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8a19.79 19.79 0 01-3.07-8.67A2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>
+        Jetzt Termin anfragen
+      </a>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ── CLAIM ── -->
+  <section class="claim">
+    <h2>
+      <strong>Reparaturen direkt bei Ihnen vor Ort</strong><br>
+      kein Transport &ndash; kein Stress
+    </h2>
+  </section>
+
+  <!-- ── SERVICES ── -->
+  <section class="services" id="leistungen">
+    <h2 class="section-title">Leistungen &amp; Preise</h2>
+    <div class="services-grid">
+
+      <div class="service-item">
+        <div class="service-left">
+          <svg class="service-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+          <span class="service-name">Inspektion E-Bike <em>(alle Marken!)</em></span>
+        </div>
+        <span class="service-price">ab 89,– €</span>
+      </div>
+
+      <div class="service-item">
+        <div class="service-left">
+          <svg class="service-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+          <span class="service-name">Fahrrad-Inspektion</span>
+        </div>
+        <span class="service-price">ab 69,– €</span>
+      </div>
+
+      <div class="service-item">
+        <div class="service-left">
+          <svg class="service-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+          <span class="service-name">Schlauchwechsel inkl. Material</span>
+        </div>
+        <span class="service-price">ab 30,– €</span>
+      </div>
+
+      <div class="service-item">
+        <div class="service-left">
+          <svg class="service-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+          <span class="service-name">Bremsen, Schaltung, Licht …</span>
+        </div>
+        <span class="service-price">auf Anfrage</span>
+      </div>
+
+      <div class="service-item">
+        <div class="service-left">
+          <svg class="service-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+          <span class="service-name">Anhänger, Lastenrad, Kinderrad</span>
+        </div>
+        <span class="service-price">auf Anfrage</span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── BRANDS ── -->
+  <div class="brands">
+    <p class="brands-title">Alle Marken willkommen</p>
+    <p class="brands-sub">
+      Markenrad<span>·</span>Baumarkt<span>·</span>Discountrad
+    </p>
+  </div>
+
+  <!-- ── FREE CHECK ── -->
+  <section class="free-check">
+    <div class="free-check-card">
+      <!-- Shield icon -->
+      <svg class="shield-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+        <polyline points="9 12 11 14 15 10"/>
+      </svg>
+      <p class="free-check-title">+ Kostenloser Sicherheits-Check</p>
+      <div class="free-check-items">
+        <span>Bremsen</span>
+        <span>Licht</span>
+        <span>Luftdruck</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CONTACT ── -->
+  <section class="contact" id="kontakt">
+    <h2 class="section-title">Jetzt Termin anfragen</h2>
+    <div class="contact-inner">
+      <div>
+        <p class="contact-label">Jetzt Termin anfragen:</p>
+        <a class="contact-number" href="tel:+4917681419966">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8a19.79 19.79 0 01-3.07-8.67A2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>
+          0176 81419966
+        </a>
+        <p class="contact-hint">Tel. &amp; WhatsApp</p>
+        <a class="wa-btn" href="https://wa.me/4917681419966" target="_blank" rel="noopener">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          WhatsApp schreiben
+        </a>
+      </div>
+
+      <div class="qr-block">
+        <!-- QR code placeholder – replace src with real QR image if available -->
+        <div class="qr-box">
+          <svg viewBox="0 0 200 200" width="100" height="100" xmlns="http://www.w3.org/2000/svg" aria-label="QR-Code für WhatsApp">
+            <!-- Top-left finder -->
+            <rect x="10" y="10" width="60" height="60" fill="none" stroke="#000" stroke-width="8"/>
+            <rect x="25" y="25" width="30" height="30" fill="#000"/>
+            <!-- Top-right finder -->
+            <rect x="130" y="10" width="60" height="60" fill="none" stroke="#000" stroke-width="8"/>
+            <rect x="145" y="25" width="30" height="30" fill="#000"/>
+            <!-- Bottom-left finder -->
+            <rect x="10" y="130" width="60" height="60" fill="none" stroke="#000" stroke-width="8"/>
+            <rect x="25" y="145" width="30" height="30" fill="#000"/>
+            <!-- Data modules (decorative) -->
+            <rect x="90" y="10" width="10" height="10" fill="#000"/>
+            <rect x="110" y="10" width="10" height="10" fill="#000"/>
+            <rect x="80" y="20" width="10" height="10" fill="#000"/>
+            <rect x="100" y="30" width="10" height="10" fill="#000"/>
+            <rect x="80" y="40" width="10" height="10" fill="#000"/>
+            <rect x="115" y="50" width="10" height="10" fill="#000"/>
+            <rect x="85" y="60" width="10" height="10" fill="#000"/>
+            <rect x="10" y="85" width="10" height="10" fill="#000"/>
+            <rect x="30" y="90" width="10" height="10" fill="#000"/>
+            <rect x="50" y="80" width="10" height="10" fill="#000"/>
+            <rect x="70" y="90" width="10" height="10" fill="#000"/>
+            <rect x="90" y="80" width="10" height="10" fill="#000"/>
+            <rect x="110" y="90" width="10" height="10" fill="#000"/>
+            <rect x="130" y="80" width="10" height="10" fill="#000"/>
+            <rect x="155" y="90" width="10" height="10" fill="#000"/>
+            <rect x="180" y="85" width="10" height="10" fill="#000"/>
+            <rect x="80" y="110" width="10" height="10" fill="#000"/>
+            <rect x="100" y="100" width="10" height="10" fill="#000"/>
+            <rect x="120" y="115" width="10" height="10" fill="#000"/>
+            <rect x="140" y="105" width="10" height="10" fill="#000"/>
+            <rect x="160" y="120" width="10" height="10" fill="#000"/>
+            <rect x="80" y="130" width="10" height="10" fill="#000"/>
+            <rect x="100" y="145" width="10" height="10" fill="#000"/>
+            <rect x="115" y="130" width="10" height="10" fill="#000"/>
+            <rect x="130" y="150" width="10" height="10" fill="#000"/>
+            <rect x="150" y="140" width="10" height="10" fill="#000"/>
+            <rect x="170" y="155" width="10" height="10" fill="#000"/>
+            <rect x="80" y="165" width="10" height="10" fill="#000"/>
+            <rect x="95" y="180" width="10" height="10" fill="#000"/>
+            <rect x="115" y="170" width="10" height="10" fill="#000"/>
+          </svg>
+        </div>
+        <p class="qr-label">WhatsApp scannen</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ── -->
+  <footer>
+    <p class="footer-slogan">
+      <strong>Mobil</strong><span>·</span><strong>Fair</strong><span>·</span><strong>Zuverlässig</strong>
+      &nbsp;|&nbsp; Mandelsloh &amp; Region Hannover
+    </p>
+  </footer>
+
+  <!-- ── STICKY MOBILE BAR ── -->
+  <div class="sticky-bar" aria-label="Schnell anrufen">
+    <a href="tel:+4917681419966">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8a19.79 19.79 0 01-3.07-8.67A2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>
+      0176 81419966 anrufen
+    </a>
+  </div>
+
+</body>
+</html>
