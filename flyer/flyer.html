@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Swenja.Maria – Flyer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+  <style>
+    /* ===== SCREEN PREVIEW ===== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #e8dced;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      padding: 40px 20px;
+      font-family: 'Lato', sans-serif;
+    }
+
+    /* ===== A4 FLYER CARD ===== */
+    .flyer {
+      width: 210mm;
+      min-height: 297mm;
+      background: #f9f3fa;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 8px 40px rgba(100, 60, 120, 0.18);
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ---- Decorative corner ornaments ---- */
+    .flyer::before,
+    .flyer::after {
+      content: '';
+      position: absolute;
+      width: 80px;
+      height: 80px;
+      border-color: #c4a0c8;
+      border-style: solid;
+      opacity: 0.5;
+    }
+    .flyer::before {
+      top: 16px;
+      left: 16px;
+      border-width: 2px 0 0 2px;
+    }
+    .flyer::after {
+      bottom: 16px;
+      right: 16px;
+      border-width: 0 2px 2px 0;
+    }
+
+    /* ===== HEADER ===== */
+    .header {
+      text-align: center;
+      padding: 32px 40px 16px;
+    }
+
+    .brand-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 52px;
+      font-weight: 500;
+      color: #3a2a3e;
+      letter-spacing: 2px;
+      line-height: 1.1;
+    }
+
+    .tagline {
+      font-family: 'Lato', sans-serif;
+      font-size: 15px;
+      font-weight: 300;
+      color: #6b4f72;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-top: 6px;
+    }
+
+    /* Divider */
+    .divider {
+      width: 60px;
+      height: 1.5px;
+      background: #c4a0c8;
+      margin: 12px auto;
+    }
+
+    /* ===== MAIN PHOTO AREA ===== */
+    .photo-main {
+      margin: 0 28px;
+      border-radius: 4px;
+      overflow: hidden;
+      display: flex;
+      gap: 8px;
+      height: 220px;
+    }
+
+    .photo-box {
+      flex: 1;
+      background: #ddd0e0;
+      border-radius: 4px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #8a6a90;
+      font-size: 12px;
+      font-weight: 400;
+      text-align: center;
+      padding: 10px;
+      letter-spacing: 0.5px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .photo-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    .photo-label {
+      font-size: 11px;
+      color: #8a6a90;
+      text-align: center;
+      font-style: italic;
+      z-index: 1;
+    }
+
+    .photo-icon {
+      font-size: 32px;
+      margin-bottom: 6px;
+      opacity: 0.6;
+    }
+
+    /* ===== COLLARS ROW ===== */
+    .photo-collars {
+      margin: 8px 28px 0;
+      height: 95px;
+      background: #ddd0e0;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      color: #8a6a90;
+      font-size: 11px;
+      font-style: italic;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .photo-collars img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    /* ===== CONTENT SECTION ===== */
+    .content-section {
+      display: flex;
+      align-items: flex-start;
+      margin: 16px 28px 0;
+      gap: 16px;
+      flex: 1;
+    }
+
+    /* Product list */
+    .product-list {
+      flex: 1;
+    }
+
+    .product-list h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 500;
+      color: #3a2a3e;
+      margin-bottom: 10px;
+    }
+
+    .product-list ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .product-list ul li {
+      font-size: 15px;
+      font-weight: 400;
+      color: #4a3550;
+      padding: 4px 0 4px 18px;
+      position: relative;
+      letter-spacing: 0.2px;
+    }
+
+    .product-list ul li::before {
+      content: '•';
+      position: absolute;
+      left: 4px;
+      color: #c4a0c8;
+      font-size: 18px;
+      line-height: 1.1;
+    }
+
+    /* Right side photos */
+    .photo-right {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      width: 115px;
+    }
+
+    .photo-small {
+      width: 115px;
+      height: 100px;
+      background: #ddd0e0;
+      border-radius: 4px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #8a6a90;
+      font-size: 10px;
+      font-style: italic;
+      text-align: center;
+      padding: 6px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .photo-small img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    .photo-small .photo-icon {
+      font-size: 24px;
+    }
+
+    /* ===== FOOTER / CONTACT ===== */
+    .footer {
+      margin: 16px 28px 28px;
+      padding: 16px 20px;
+      background: rgba(196, 160, 200, 0.15);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .contact-block {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .whatsapp-icon {
+      width: 42px;
+      height: 42px;
+      flex-shrink: 0;
+    }
+
+    .contact-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .contact-label {
+      font-family: 'Lato', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: #25d366;
+      letter-spacing: 0.5px;
+    }
+
+    .contact-number {
+      font-family: 'Lato', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: #3a2a3e;
+      letter-spacing: 0.5px;
+    }
+
+    .contact-hint {
+      font-size: 11px;
+      color: #7a5a80;
+      margin-top: 2px;
+      font-style: italic;
+    }
+
+    /* QR Code */
+    .qr-block {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .qr-block img {
+      width: 80px;
+      height: 80px;
+      border-radius: 4px;
+      border: 2px solid #c4a0c8;
+      padding: 3px;
+      background: #fff;
+    }
+
+    .qr-label {
+      font-size: 9px;
+      color: #8a6a90;
+      text-align: center;
+      font-style: italic;
+    }
+
+    /* ===== PRINT STYLES ===== */
+    @media print {
+      body {
+        background: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .flyer {
+        width: 210mm;
+        min-height: 297mm;
+        box-shadow: none;
+        page-break-after: always;
+      }
+
+      @page {
+        size: A4 portrait;
+        margin: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="flyer">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="brand-name">Swenja.Maria</div>
+    <div class="tagline">Handmade für Hunde &amp; Katzen</div>
+    <div class="divider"></div>
+  </div>
+
+  <!-- MAIN PHOTOS (zwei Ständer nebeneinander) -->
+  <div class="photo-main">
+    <div class="photo-box">
+      <!-- Foto hier einfügen: z.B. <img src="foto-haelsbaender-1.jpg" alt="Halsbänder"> -->
+      <span class="photo-icon">🐾</span>
+      <span class="photo-label">Foto: Halsband-Ständer links<br>(Halsbänder mit Anhängern)</span>
+    </div>
+    <div class="photo-box">
+      <!-- Foto hier einfügen: z.B. <img src="foto-leinen.jpg" alt="Leinen"> -->
+      <span class="photo-icon">🐕</span>
+      <span class="photo-label">Foto: Halsband-Ständer rechts<br>(Leinen & Sets)</span>
+    </div>
+  </div>
+
+  <!-- COLLAR FLAT LAY -->
+  <div class="photo-collars">
+    <!-- Foto hier einfügen: z.B. <img src="foto-haelsbaender-reihe.jpg" alt="Halsbänder Reihe"> -->
+    <span class="photo-icon" style="font-size:22px">📸</span>
+    <span style="font-size:11px; font-style:italic; color:#8a6a90">Foto: Halsbänder-Auswahl (flach liegend)</span>
+  </div>
+
+  <!-- CONTENT: Produktliste + kleine Fotos rechts -->
+  <div class="content-section">
+
+    <div class="product-list">
+      <h2>Individuelles Zubehör:</h2>
+      <ul>
+        <li>Halsbänder</li>
+        <li>Leinen</li>
+        <li>Sets &amp; Anhänger</li>
+        <li>Freundschaftsbänder für Hunde</li>
+        <li>Schlüsselanhänger</li>
+      </ul>
+    </div>
+
+    <div class="photo-right">
+      <div class="photo-small">
+        <!-- Foto: Anhänger/Armband -->
+        <span class="photo-icon">✨</span>
+        <span style="font-size:9px; font-style:italic; color:#8a6a90">Foto:<br>Anhänger-Set</span>
+      </div>
+      <div class="photo-small">
+        <!-- Foto: Schlüsselanhänger oder Dog Lover Deko -->
+        <span class="photo-icon">🐱</span>
+        <span style="font-size:9px; font-style:italic; color:#8a6a90">Foto:<br>Schlüssel&shy;anhänger</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- FOOTER: WhatsApp + QR -->
+  <div class="footer">
+    <div class="contact-block">
+      <!-- WhatsApp SVG Icon -->
+      <svg class="whatsapp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+        <circle cx="24" cy="24" r="24" fill="#25d366"/>
+        <path fill="#fff" d="M24 10.2C16.4 10.2 10.2 16.4 10.2 24c0 2.6.7 5 1.9 7.2l-2 7.4 7.6-2c2.1 1.1 4.5 1.7 7 1.7 7.6 0 13.8-6.2 13.8-13.8S31.6 10.2 24 10.2zm7.8 19.5c-.3.9-1.8 1.7-2.5 1.8-.6.1-1.4.1-2.3-.1-.5-.1-1.2-.3-2-.7-3.5-1.5-5.8-5-6-5.2-.1-.2-1.2-1.6-1.2-3.1 0-1.5.8-2.2 1.1-2.5.3-.3.6-.4.8-.4h.6c.2 0 .4 0 .6.5.2.5.8 1.9.8 2s.1.3 0 .5c-.1.2-.2.3-.3.5-.1.2-.3.4-.4.5-.1.1-.3.3-.1.6.2.3.9 1.4 1.9 2.3 1.3 1.1 2.4 1.5 2.7 1.6.3.1.5.1.7-.1.2-.2.8-.9 1-1.2.2-.3.4-.3.7-.2.3.1 2 .9 2.3 1.1.3.2.6.3.7.4.1.2.1.9-.2 1.8z"/>
+      </svg>
+      <div class="contact-text">
+        <span class="contact-label">WhatsApp</span>
+        <span class="contact-number">0170 7078106</span>
+        <span class="contact-hint">Schreib mir direkt bei WhatsApp</span>
+      </div>
+    </div>
+
+    <!-- QR Code: WhatsApp wa.me Link -->
+    <div class="qr-block">
+      <img
+        src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&color=3a2a3e&bgcolor=ffffff&data=https%3A%2F%2Fwa.me%2F491707078106"
+        alt="WhatsApp QR Code"
+      />
+      <span class="qr-label">Scannen &amp; direkt<br>schreiben</span>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
